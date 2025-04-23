@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="FXMLDocumentController">
+
+    <center>
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" nodeOrientation="RIGHT_TO_LEFT">
+            
+            <!-- تب اضافه کردن کتاب -->
+            <Tab text="اضافه کردن کتاب">
+                <AnchorPane>
+                    <VBox spacing="10" style="-fx-padding: 10;"
+                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="اضافه کردن کتاب جدید" />
+                        <TextField fx:id="bookIdField" promptText="کد کتاب" />
+                        <TextField fx:id="bookTitleField" promptText="عنوان کتاب" />
+                        <TextField fx:id="bookAuthorField" promptText="نویسنده" />
+                        <Button text="اضافه کردن" onAction="#addBook" />
+                        <Label fx:id="bookMessageLabel" />
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+
+            <!-- تب اضافه کردن عضو -->
+            <Tab text="اضافه کردن عضو">
+                <AnchorPane>
+                    <VBox spacing="10" style="-fx-padding: 10;"
+                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="اضافه کردن عضو جدید" />
+                        <TextField fx:id="memberIdField" promptText="کد عضویت" />
+                        <TextField fx:id="memberNameField" promptText="نام عضو" />
+                        <Button text="اضافه کردن" onAction="#addMember" />
+                        <Label fx:id="memberMessageLabel" />
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+
+            <!-- تب نمایش کتاب‌ها -->
+            <Tab text="نمایش کتاب‌ها">
+                <AnchorPane>
+                    <VBox spacing="10" style="-fx-padding: 10;"
+                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="لیست کتاب‌ها" />
+                        <TableView fx:id="booksTable">
+                            <columns>
+                                <TableColumn fx:id="idColumn" text="کد" prefWidth="100" />
+                                <TableColumn fx:id="titleColumn" text="عنوان" prefWidth="200" />
+                                <TableColumn fx:id="authorColumn" text="نویسنده" prefWidth="200" />
+                                <TableColumn fx:id="borrowedColumn" text="وضعیت" prefWidth="100" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+
+            <!-- تب امانت دادن کتاب -->
+            <Tab text="امانت دادن کتاب">
+                <AnchorPane>
+                    <VBox spacing="10" style="-fx-padding: 10;"
+                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="امانت دادن کتاب" />
+                        <ComboBox fx:id="bookCombo" promptText="انتخاب کتاب" />
+                        <ComboBox fx:id="memberCombo" promptText="انتخاب عضو" />
+                        <Button text="امانت دادن" onAction="#borrowBook" />
+                        <Label fx:id="borrowMessageLabel" />
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+
+            <!-- تب جستجوی کتاب -->
+            <Tab text="جستجوی کتاب">
+                <AnchorPane>
+                    <VBox spacing="10" style="-fx-padding: 10;"
+                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="جستجوی کتاب" />
+                        <TextField fx:id="searchField" promptText="جستجو بر اساس عنوان یا نویسنده" />
+                        <TableView fx:id="searchTable">
+                            <columns>
+                                <TableColumn fx:id="searchIdColumn" text="کد" prefWidth="100" />
+                                <TableColumn fx:id="searchTitleColumn" text="عنوان" prefWidth="200" />
+                                <TableColumn fx:id="searchAuthorColumn" text="نویسنده" prefWidth="200" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>
+

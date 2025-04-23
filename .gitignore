@@ -1,0 +1,11 @@
+# NetBeans specific
+nbproject/private/
+build/
+dist/
+*.jar
+*.war
+*.ear
+# Other common ignores
+*.log
+.idea/
+.DS_Store
