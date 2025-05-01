@@ -1,79 +1,73 @@
 package model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 
 public class Book {
+    private final IntegerProperty id = new SimpleIntegerProperty();
+    private final StringProperty title = new SimpleStringProperty();
+    private final StringProperty author = new SimpleStringProperty();
+    private final BooleanProperty borrowed = new SimpleBooleanProperty();
+    private final StringProperty borrowDate = new SimpleStringProperty();
 
-    private final StringProperty id;
-    private final StringProperty title;
-    private final StringProperty author;
-    private final BooleanProperty borrowedText; // تغییر به BooleanProperty
-
-    // سازنده
-    public Book(String id, String title, String author) {
-        this.id = new SimpleStringProperty(id);
-        this.title = new SimpleStringProperty(title);
-        this.author = new SimpleStringProperty(author);
-        this.borrowedText = new SimpleBooleanProperty(false); // به‌طور پیش‌فرض قرض گرفته نشده
+    // سازنده اصلی با 5 پارامتر
+    public Book(int id, String title, String author, boolean borrowed, String borrowDate) {
+        this.id.set(id);
+        this.title.set(title);
+        this.author.set(author);
+        this.borrowed.set(borrowed);
+        this.borrowDate.set(borrowDate);
     }
 
-    // متدهای getter برای دسترسی به خصوصیات
-    public String getId() {
+    // سازنده جدید با 4 پارامتر (بدون borrowDate)
+    public Book(int id, String title, String author, boolean borrowed) {
+        this(id, title, author, borrowed, "");
+    }
+
+    public int getId() {
         return id.get();
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 
     public String getTitle() {
         return title.get();
     }
 
-    public String getAuthor() {
-        return author.get();
-    }
-
-    public boolean getBorrowedText() {
-        return borrowedText.get();
-    }
-
-    // متدهای Property برای استفاده در TableView
-    public StringProperty idProperty() {
-        return id;
-    }
-
     public StringProperty titleProperty() {
         return title;
+    }
+
+    public String getAuthor() {
+        return author.get();
     }
 
     public StringProperty authorProperty() {
         return author;
     }
 
-    public BooleanProperty borrowedTextProperty() {
-        return borrowedText;
-    }
-
-    // متدهای setter برای تنظیم خصوصیات
-    public void setId(String id) {
-        this.id.set(id);
-    }
-
-    public void setTitle(String title) {
-        this.title.set(title);
-    }
-
-    public void setAuthor(String author) {
-        this.author.set(author);
-    }
-
-    public void setBorrowedText(boolean borrowedText) {
-        this.borrowedText.set(borrowedText);
-    }
-
-    // متد اصلاح‌شده isBorrowed
     public boolean isBorrowed() {
-        return borrowedText.get(); // وضعیت امانت گرفتن کتاب را برمی‌گرداند
+        return borrowed.get();
+    }
+
+    public BooleanProperty borrowedProperty() {
+        return borrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        this.borrowed.set(borrowed);
+    }
+
+    public String getBorrowedDate() {
+        return borrowDate.get();
+    }
+
+    public StringProperty borrowDateProperty() {
+        return borrowDate;
+    }
+
+    public void setBorrowedDate(String borrowDate) {
+        this.borrowDate.set(borrowDate);
     }
 }
-

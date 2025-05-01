@@ -10,16 +10,14 @@
 
     <center>
         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" nodeOrientation="RIGHT_TO_LEFT">
-            
+
             <!-- تب اضافه کردن کتاب -->
             <Tab text="اضافه کردن کتاب">
                 <AnchorPane>
-                    <VBox spacing="10" style="-fx-padding: 10;"
-                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                    <VBox spacing="10" style="-fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
                           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="اضافه کردن کتاب جدید" />
-                        <TextField fx:id="bookIdField" promptText="کد کتاب" />
-                        <TextField fx:id="bookTitleField" promptText="عنوان کتاب" />
+                        <TextField fx:id="bookTitleField" promptText="نام کتاب" />
                         <TextField fx:id="bookAuthorField" promptText="نویسنده" />
                         <Button text="اضافه کردن" onAction="#addBook" />
                         <Label fx:id="bookMessageLabel" />
@@ -30,8 +28,7 @@
             <!-- تب اضافه کردن عضو -->
             <Tab text="اضافه کردن عضو">
                 <AnchorPane>
-                    <VBox spacing="10" style="-fx-padding: 10;"
-                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                    <VBox spacing="10" style="-fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
                           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="اضافه کردن عضو جدید" />
                         <TextField fx:id="memberIdField" promptText="کد عضویت" />
@@ -45,8 +42,7 @@
             <!-- تب نمایش کتاب‌ها -->
             <Tab text="نمایش کتاب‌ها">
                 <AnchorPane>
-                    <VBox spacing="10" style="-fx-padding: 10;"
-                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                    <VBox spacing="10" style="-fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
                           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="لیست کتاب‌ها" />
                         <TableView fx:id="booksTable">
@@ -64,12 +60,41 @@
             <!-- تب امانت دادن کتاب -->
             <Tab text="امانت دادن کتاب">
                 <AnchorPane>
-                    <VBox spacing="10" style="-fx-padding: 10;"
-                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                    <VBox spacing="10" style="-fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
                           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-                        <Label text="امانت دادن کتاب" />
-                        <ComboBox fx:id="bookCombo" promptText="انتخاب کتاب" />
-                        <ComboBox fx:id="memberCombo" promptText="انتخاب عضو" />
+
+                        <Label text="انتخاب کتاب برای امانت دادن" />
+
+                        <HBox spacing="5">
+                            <TextField fx:id="searchBorrowBookField" promptText="نام کتاب را وارد کنید" HBox.hgrow="ALWAYS" />
+                            <Button text="جستجو کتاب" onAction="#searchBorrowBooks" />
+                            <Button text="بازنشانی" onAction="#resetAllFields" />
+                        </HBox>
+
+                        <TableView fx:id="borrowBooksTable">
+                            <columns>
+                                <TableColumn fx:id="borrowBookIdColumn" text="کد" prefWidth="100" />
+                                <TableColumn fx:id="borrowBookTitleColumn" text="عنوان" prefWidth="200" />
+                                <TableColumn fx:id="borrowBookAuthorColumn" text="نویسنده" prefWidth="200" />
+                                <!-- ستون وضعیت کتاب -->
+                                <TableColumn fx:id="borrowBookStatusColumn" text="وضعیت" prefWidth="100" />
+                            </columns>
+                        </TableView>
+
+                        <Label text="انتخاب عضو دریافت‌کننده" />
+
+                        <HBox spacing="5">
+                            <TextField fx:id="searchBorrowMemberField" promptText="کد عضویت را وارد کنید" HBox.hgrow="ALWAYS" />
+                            <Button text="جستجو عضو" onAction="#searchBorrowMembers" />
+                        </HBox>
+
+                        <TableView fx:id="borrowMembersTable">
+                            <columns>
+                                <TableColumn fx:id="borrowMemberIdColumn" text="کد عضویت" prefWidth="100" />
+                                <TableColumn fx:id="borrowMemberNameColumn" text="نام عضو" prefWidth="200" />
+                            </columns>
+                        </TableView>
+
                         <Button text="امانت دادن" onAction="#borrowBook" />
                         <Label fx:id="borrowMessageLabel" />
                     </VBox>
@@ -79,16 +104,21 @@
             <!-- تب جستجوی کتاب -->
             <Tab text="جستجوی کتاب">
                 <AnchorPane>
-                    <VBox spacing="10" style="-fx-padding: 10;"
-                          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                    <VBox spacing="10" style="-fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
                           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="جستجوی کتاب" />
                         <TextField fx:id="searchField" promptText="جستجو بر اساس عنوان یا نویسنده" />
+                        <HBox spacing="5">
+                            <Button text="جستجو" onAction="#searchBooks" />
+                            <Button text="بازنشانی" onAction="#resetSearchFields" />
+                        </HBox>
                         <TableView fx:id="searchTable">
                             <columns>
                                 <TableColumn fx:id="searchIdColumn" text="کد" prefWidth="100" />
                                 <TableColumn fx:id="searchTitleColumn" text="عنوان" prefWidth="200" />
                                 <TableColumn fx:id="searchAuthorColumn" text="نویسنده" prefWidth="200" />
+                                <!-- ستون وضعیت کتاب -->
+                                <TableColumn fx:id="searchStatusColumn" text="وضعیت" prefWidth="100" />
                             </columns>
                         </TableView>
                     </VBox>
@@ -98,4 +128,3 @@
         </TabPane>
     </center>
 </BorderPane>
-

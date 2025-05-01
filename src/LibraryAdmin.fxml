@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LibraryAdmin">
+    <center>
+        <TabPane fx:id="tabPane" nodeOrientation="RIGHT_TO_LEFT" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- تب مدیریت امانت کتاب -->
+            <Tab text="مدیریت امانت کتاب">
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <Label text="مدیریت امانت کتاب" />
+                    <HBox spacing="10">
+                        <TextField fx:id="borrowSearchField" promptText="جست‌وجوی کتاب بر اساس کد یا عنوان" />
+                        <Button onAction="#resetBorrowSearch" text="بازنشانی" />
+                    </HBox>
+                    <TableView fx:id="borrowTable" prefHeight="132.0" prefWidth="842.0">
+                        <columns>
+                            <TableColumn fx:id="borrowIdColumn" prefWidth="100" text="کد" />
+                            <TableColumn fx:id="borrowTitleColumn" prefWidth="200" text="عنوان" />
+                            <TableColumn fx:id="borrowAuthorColumn" prefWidth="200" text="نویسنده" />
+                            <TableColumn fx:id="borrowStatusColumn" prefWidth="100" text="وضعیت" />
+                            <TableColumn fx:id="borrowDateColumnBorrow" prefWidth="120" text="تاریخ امانت" />
+                            <TableColumn fx:id="returnDateColumnBorrow" prefWidth="120" text="تاریخ بازگشت" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <TextField fx:id="memberSearchField" promptText="جست‌وجوی عضو بر اساس کد یا نام" />
+                        <Button onAction="#resetMemberBorrowSearch" text="بازنشانی" />
+                    </HBox>
+                    <TableView fx:id="memberBorrowTable" prefHeight="99.0" prefWidth="842.0">
+                        <columns>
+                            <TableColumn fx:id="memberBorrowIdColumn" prefWidth="100" text="کد" />
+                            <TableColumn fx:id="memberBorrowNameColumn" prefWidth="200" text="نام" />
+                            <TableColumn fx:id="memberBorrowDateColumn" prefWidth="120" text="تاریخ امانت" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Label text="تاریخ امانت:" />
+                        <DatePicker fx:id="borrowDatePicker" />
+                        <Label text="تاریخ بازگشت:" />
+                        <DatePicker fx:id="returnDatePicker" />
+                    </HBox>
+                    <HBox spacing="10">
+                        <Button fx:id="confirmBorrowButton" onAction="#confirmBorrow" text="تأیید امانت" />
+                        <Button fx:id="cancelBorrowButton" onAction="#cancelBorrow" text="رد امانت" />
+                        <Button fx:id="returnBookButton" onAction="#returnBook" text="بازگشت کتاب" />
+                    </HBox>
+                    <Label fx:id="borrowMessageLabel" />
+                    <Button onAction="#goBackToLogin" text="خروج" />
+                </VBox>
+            </Tab>
+
+            <!-- تب اضافه کردن کتاب -->
+            <Tab text="اضافه کردن کتاب">
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <Label text="اضافه کردن کتاب جدید" />
+                    <TextField fx:id="bookTitleField" promptText="نام کتاب" />
+                    <TextField fx:id="bookAuthorField" promptText="نویسنده" />
+                    <TextField fx:id="searchBookField" promptText="جست‌وجوی کتاب" />
+                    <Button onAction="#addBook" text="اضافه کردن" />
+                    <Label fx:id="bookMessageLabel" />
+                </VBox>
+            </Tab>
+
+            <!-- تب نمایش کتاب‌ها -->
+            <Tab text="نمایش کتاب‌ها">
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <Label text="لیست کتاب‌ها" />
+                    <HBox spacing="10">
+                        <TextField fx:id="searchField" promptText="جست‌وجوی کتاب بر اساس عنوان یا نویسنده" />
+                        <Button onAction="#resetBookSearch" text="بازنشانی" />
+                        <Button onAction="#deleteSelectedBook" text="حذف کتاب انتخاب‌شده" />
+                    </HBox>
+                    <TableView fx:id="booksTable">
+                        <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="100" text="کد" />
+                            <TableColumn fx:id="titleColumn" prefWidth="200" text="عنوان" />
+                            <TableColumn fx:id="authorColumn" prefWidth="200" text="نویسنده" />
+                            <TableColumn fx:id="borrowedColumn" prefWidth="100" text="وضعیت" />
+                            <TableColumn fx:id="borrowDateColumn" prefWidth="120" text="تاریخ امانت" />
+                            <TableColumn fx:id="returnDateColumn" prefWidth="120" text="تاریخ بازگشت" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- تب اضافه کردن عضو -->
+            <Tab text="اضافه کردن عضو">
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <Label text="اضافه کردن عضو جدید" />
+                    <TextField fx:id="memberNameField" promptText="نام عضو" />
+                    <TextField fx:id="memberIdField" promptText="کد عضو" />
+                    <Button onAction="#addMember" text="اضافه کردن" />
+                    <Label fx:id="memberMessageLabel" />
+                </VBox>
+            </Tab>
+
+            <!-- تب نمایش اعضا -->
+            <Tab text="نمایش اعضا">
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <Label text="لیست اعضا" />
+                    <HBox spacing="10">
+                        <TextField fx:id="searchMemberField" promptText="جست‌وجوی عضو بر اساس نام یا کد" />
+                        <Button onAction="#resetMemberSearch" text="بازنشانی" />
+                        <Button onAction="#deleteSelectedMember" text="حذف عضو انتخاب‌شده" />
+                    </HBox>
+                    <TableView fx:id="membersTable">
+                        <columns>
+                            <TableColumn fx:id="memberIdColumn" prefWidth="100" text="کد" />
+                            <TableColumn fx:id="memberNameColumn" prefWidth="200" text="نام" />
+                            <TableColumn fx:id="memberBorrowDateColumn" prefWidth="120" text="تاریخ امانت" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- تب مدیریت درخواست‌های کتاب -->
+            <Tab text="مدیریت درخواست‌های کتاب">
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <Label text="درخواست‌های ثبت شده" />
+                    <TableView fx:id="requestsTable">
+                        <columns>
+                            <TableColumn fx:id="requestIdColumn" prefWidth="100" text="کد درخواست" />
+                            <TableColumn fx:id="requestTitleColumn" prefWidth="200" text="عنوان کتاب" />
+                            <TableColumn fx:id="requestAuthorColumn" prefWidth="200" text="نویسنده" />
+                            <TableColumn fx:id="requesterNameColumn" prefWidth="150" text="نام درخواست‌دهنده" />
+                            <TableColumn fx:id="approvedColumn" prefWidth="100" text="وضعیت تأیید" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button onAction="#approveSelectedRequest" text="تأیید درخواست" />
+                        <Button onAction="#rejectSelectedRequest" text="رد درخواست" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- تب گزارش‌ها -->
+            <Tab text="گزارش‌ها">
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <Label text="گزارش‌های کتابخانه" />
+                    <TextArea fx:id="reportTextArea" editable="false" prefHeight="300" prefWidth="842" wrapText="true" />
+                    <HBox spacing="10">
+                        <Button onAction="#showReport" text="نمایش گزارش" />
+                        <Button onAction="#saveReport" text="ذخیره گزارش" />
+                    </HBox>
+                    <Label fx:id="reportMessageLabel" />
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10;" />
+    </bottom>
+</BorderPane>
